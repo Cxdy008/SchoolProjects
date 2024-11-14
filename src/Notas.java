@@ -1,11 +1,17 @@
 import java.util.Scanner;
 
+
 public class Notas {
     public static void main(String[] args) {
         Scanner input =  new Scanner(System.in);
-        float[] studentsGrade = new float[10];
-        float /*averageGrade = 0*/ anualGrade, finalExam;
-        int numberOfAcceptedStudents = 0;
+        int numberOfStudents = 4;
+        float[] studentsGrade = new float[numberOfStudents];
+        float anualGrade;
+        float finalExam;
+        int numberOfAcceptedStudents = 0, numberOfRejectedStudents = 0;
+
+        System.out.print("Insira o número de estudantes que deseja: ");
+        numberOfStudents = input.nextInt();
 
         for (int i = 0; i < studentsGrade.length; i++) {
             do {
@@ -26,19 +32,23 @@ public class Notas {
 
             studentsGrade[i] = anualGrade*0.4f + finalExam*0.6f;
 
-           // averageGrade += studentsGrade[i];
+
 
             if(studentsGrade[i] >= 9.5) {
                 numberOfAcceptedStudents++;
+            } else {
+                numberOfRejectedStudents++;
             }
         }
 
-        //averageGrade /= studentsGrade.length;
-
-        //System.out.printf("A média da turma é de: %.2f\n", averageGrade);
-        for(float studentGrade: studentsGrade) {
-            System.out.printf("%.2f\n",studentGrade);
+        for(int i = 0; i < studentsGrade.length; i++) {
+            if(studentsGrade[i] >= 9.5) {
+                System.out.printf("| %d Estudante | Média %.1f | Status %s\n",i+1,studentsGrade[i],"Aprovado");
+            } else {
+                System.out.printf("| %d Estudante | Média %.1f | Status %s\n",i+1,studentsGrade[i],"Reprovado");
+            }
         }
         System.out.printf("O número de estudantes aptos: %d\n", numberOfAcceptedStudents);
+        System.out.printf("O número de estudantes não aptos: %d\n", numberOfRejectedStudents);
     }
 }
